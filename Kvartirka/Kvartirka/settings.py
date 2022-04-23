@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-be8(yvn9-cd%gr=$42)m2&zz%sx*a!0-^nh(+mt9t%8fx%-ajd'
+SECRET_KEY = '***'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'Kvartirka.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kvartirka_db',
-        'USER': 'postgres',
-        'PASSWORD': 'TynjGtr64',
+        'NAME': '***',
+        'USER': '***',
+        'PASSWORD': '***',
         'HOST': 'localhost',
         'PORT': '',
     }
