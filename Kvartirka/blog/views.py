@@ -1,5 +1,6 @@
 import json
 
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from blog.models import Comments, Article
@@ -7,15 +8,16 @@ from blog.models import Comments, Article
 
 def instert_article(request):
     if request.method == "POST":
-        print(json.loads(request.body)['content'])
         article = Article()
         article.content = json.loads(request.body)['content']
         article.save()
+        return JsonResponse({'Ответ': 'Запись добавлена'})
+    else:
+        return JsonResponse({'Ответ': 'Пожалуйста, используй метод POST'})
 
 
 def instert_comments(request):
     if request.method == "POST":
-        print(json.loads(request.body)['pk'])
         pk = json.loads(request.body)['pk']
         text = json.loads(request.body)['text']
         article = Article.objects.get(pk=pk)
@@ -23,11 +25,13 @@ def instert_comments(request):
         comments.text = text
         comments.article = article
         comments.save()
+        return JsonResponse({'Ответ': 'Комментарий добавлен'})
+    else:
+        return JsonResponse({'Ответ': 'Пожалуйста, используй метод POST'})
 
 
 def repost(request):
     if request.method == "POST":
-        print(json.loads(request.body)['parent'])
         parent = json.loads(request.body)['parent']
         text = json.loads(request.body)['text']
         parent = Comments.objects.get(pk=parent)
@@ -35,13 +39,19 @@ def repost(request):
         comments.text = text
         comments.parent = parent
         comments.save()
+        return JsonResponse({'Ответ': 'Ответ на комментарий добавлен'})
+    else:
+        return JsonResponse({'Ответ': 'Пожалуйста, используй метод POST'})
 
 
 def get_all_sub_comments(request):
-    if request.method == "POST":
-        pk = json.loads(request.body)['pk']
+    if request.method == "GET":
+        pk = request.GET.get('pk')
         comments = Comments.objects.get(pk=pk)
-        print(get_all_levels(comments))
+        list_of_comments = get_all_levels(comments)
+        return JsonResponse({'Ответ': list_of_comments})
+    else:
+        return JsonResponse({'Ответ': 'Пожалуйста, используй метод GET'})
 
 
 def get_all_levels(tree, level=0):
@@ -57,7 +67,10 @@ def get_3_levels(tree, level=0):
 
 
 def get_article_comments(request):
-    if request.method == "POST":
-        pk = json.loads(request.body)['pk']
+    if request.method == "GET":
+        pk = request.GET.get('pk')
         article = Article.objects.get(pk=pk)
-        print(get_3_levels(article))
+        list_of_comments = get_3_levels(article)
+        return JsonResponse({'Ответ': list_of_comments})
+    else:
+        return JsonResponse({'Ответ': 'Пожалуйста, используй метод GET'})

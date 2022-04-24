@@ -20,9 +20,9 @@ from blog.views import instert_article, repost, get_article_comments, get_all_su
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', instert_article),
+    path('instert_article', instert_article),
     path('instert_comments', instert_comments),
     path('repost', repost),
-    path('nested', get_all_sub_comments),
+    path('get_all_sub_comments', get_all_sub_comments),
     path('get_article_comments', get_article_comments),
 ]

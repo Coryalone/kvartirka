@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'Kvartirka.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '***',
-        'USER': '**',
-        'PASSWORD': '**',
-        'HOST': '**',
-        'PORT': '5432',
+        'NAME': 'kvartirka_db',
+        'USER': 'postgres',
+        'PASSWORD': 'TynjGtr64',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
